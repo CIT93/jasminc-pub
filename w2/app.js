@@ -1,13 +1,13 @@
 console.log('Hello from app.js! Your JavaScript is connected and running!');
-// --- Part 1: Select HTML Elements ----
+// --- Part 1: Display Elements ----
 // We use document.getElementById() to get a reference to an element by its unique ID.
 // We store these references in 'const' variables because the elements themselves won't change.
 const messageDisplayElement = document.getElementById("total-display")
 const updateButton = document.getElementById("add-item-btn");
 
-//These variables will change as the user interacts with the page.
-let userName = 'Jasmin';
-let clickCount = 0;
+//Variables for shopping cart.
+let totslCost = 0;
+const itemPrice = 15;
 
 // --- Part 2: Define a Function that Reacts to a Click---
 // A function is a block of code designed to perform a particular task.
