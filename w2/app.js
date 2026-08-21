@@ -48,5 +48,5 @@ document.addEventListener('DOMContentLoaded', function(){
     // When 'updateButton' receives a 'click' event, the 'handleButtonClick' function will execute.
    updateButton.addEventListener('click', handleButtonClick); 
 
-messageDisplayElement.textContent = `Welcome, ${userName}! Click the button below to start counting`
+totalDisplayElement.textContent = `Current Total : $0`;
 })
