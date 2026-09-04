@@ -1,48 +1,34 @@
 import * as orderHandler from "./order-handler.js";
-import * as priceCalculator from './price-calculator.js';
-
-
+import * as priceCalculator from "./price-calculator.js";
+import * as resultsDisplay from "./results-display.js";
 
 const orderForm = document.getElementById('order-form');
-const orderSummary = document.getElementById('order-summary');
-const orders = []
+
+const orders = [];
 
 const handleOrderSubmit = function (event) {
-    
+
     event.preventDefault();
 
 
-        const orderData = orderHandler.getOrderInputs();
-        const calculatedPrice = priceCalculator.calculateTotal(orderData)
-        const newOrder = {
-            ...orderData,
-            ...calculatedPrice,
-            timestamp: new Date().toISOString()
-        }
+    const orderData = orderHandler.getOrderInputs();
+    const calculatedPrice = priceCalculator.calculateTotal(orderData);
 
-        orders.push(newOrder)
-       console.log("Order History:", orders);
-       
-  
-    let summaryText = `Ordered ${orderData.qty} ${orderData.size} T-Shirt${orderData.qty > 1 ? 's' : ''}`;
+    const newOrder = {
+        ...orderData,
+        ...calculatedPrice,
+        timestamp: new Date().toISOString()
+    };
 
-
-        if (orderData.giftWrap) {
-        summaryText += " (gift wrapped)";
-    }
-
-
-   
-    orderSummary.textContent = summaryText;
+    orders.push(newOrder);
+    resultsDisplay.renderResults(newOrder);
+    
 };
-
-
-
 
 const init = function () {
     if (orderForm) {
         orderForm.addEventListener('submit', handleOrderSubmit);
-        console.log("App Initialized");
+
     }
 };
 
