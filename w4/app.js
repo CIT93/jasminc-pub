@@ -7,13 +7,14 @@ const orderSummary = document.getElementById('order-summary');
 
 
 const handleOrderSubmit = function (event) {
-
+    
     event.preventDefault();
 
 
         const orderData = orderHandler.getOrderInputs();
 
-        
+
+  
     let summaryText = `Ordered ${orderData.qty} ${orderData.size} T-Shirt${orderData.qty > 1 ? 's' : ''}`;
 
 
@@ -22,6 +23,7 @@ const handleOrderSubmit = function (event) {
     }
 
 
+   
     orderSummary.textContent = summaryText;
 };
 
