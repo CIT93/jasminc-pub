@@ -1,6 +1,7 @@
 import * as orderHandler from "./order-handler.js";
 import * as priceCalculator from "./price-calculator.js";
 import * as resultsDisplay from "./results-display.js";
+import * as orderStorage from './order-storage.js';
 
 const orderForm = document.getElementById('order-form');
 
@@ -27,9 +28,16 @@ const handleOrderSubmit = function (event) {
 
 const init = function () {
     if (orderForm) {
-        orderForm.addEventListener('submit', handleOrderSubmit);
-
+        const loadedOrders = orderStorage.loadOrders();
+    if (loadedOrders.length > 0) {
+        orders.push(...loadedOrders);
+        console.log("Orders loaded");
     }
+
+    if (orderForm) {
+        orderForm.addEventListener('submit', handleOrderSubmit);
+    }
+}
 };
 
 
