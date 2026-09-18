@@ -1,25 +1,28 @@
+export function renderOrders(orders) {
+    const tbody = document.getElementById('order-table-body');
+    
+    
+    tbody.innerHTML = '';
 
-const orderTableBody = document.getElementById('order-table-body');
-
-
-export const renderOrders = function (orders) {
-
-    orderTableBody.innerHTML = '';
-
-
-    for (const order of orders) {
-
+   
+    orders.forEach((order) => {
         const row = document.createElement('tr');
 
+        const date = order.date || new Date().toLocaleDateString();
+        const qty = order.qty ?? order.quantity ?? 1;
+        const size = order.size || 'N/A';
+        const total = typeof order.total === 'number' ? `$${order.total.toFixed(2)}` : (order.total || '$0.00');
 
         row.innerHTML = `
-            <td>${order.date}</td>
-            <td>${order.qty}</td>
-            <td>${order.size}</td>
-            <td>${order.total}</td>
+            <td>${date}</td>
+            <td>${qty}</td>
+            <td>${size}</td>
+            <td>${total}</td>
+            <td>
+                <button class="delete-btn">Delete</button>
+            </td>
         `;
 
-
-        orderTableBody.appendChild(row);
-    }
-};
+        tbody.appendChild(row);
+    });
+}
