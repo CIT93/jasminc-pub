@@ -1,16 +1,14 @@
 import * as orderHandler from "./order-handler.js";
 import * as priceCalculator from "./price-calculator.js";
-import * as resultsDisplay from "./results-display.js";
-import * as orderStorage from './order-storage.js';
+import * as orderStorage from "./order-storage.js";
+import * as orderList from "./order-list.js";
 
-const orderForm = document.getElementById('order-form');
+const orderForm = document.getElementById("order-form");
 
 const orders = [];
 
 const handleOrderSubmit = function (event) {
-
     event.preventDefault();
-
 
     const orderData = orderHandler.getOrderInputs();
     const calculatedPrice = priceCalculator.calculateTotal(orderData);
@@ -22,26 +20,25 @@ const handleOrderSubmit = function (event) {
     };
 
     orders.push(newOrder);
+
     orderStorage.saveOrders(orders);
-    resultsDisplay.renderResults(newOrder);
-    
+
+    orderList.renderOrders(orders);
 };
 
 const init = function () {
-    if (orderForm) {
-        const loadedOrders = orderStorage.loadOrders();
+    const loadedOrders = orderStorage.loadOrders();
+
     if (loadedOrders.length > 0) {
         orders.push(...loadedOrders);
         console.log("Orders loaded");
+
+        orderList.renderOrders(orders);
     }
 
     if (orderForm) {
-        orderForm.addEventListener('submit', handleOrderSubmit);
+        orderForm.addEventListener("submit", handleOrderSubmit);
     }
-}
 };
 
-
-
-
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener("DOMContentLoaded", init);
