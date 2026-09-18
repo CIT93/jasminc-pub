@@ -4,6 +4,7 @@ import * as orderStorage from "./order-storage.js";
 import * as orderList from "./order-list.js";
 
 const orderForm = document.getElementById("order-form");
+const clearBtn = document.getElementById("clear-btn");
 
 const orders = [];
 
@@ -26,6 +27,16 @@ const handleOrderSubmit = function (event) {
     orderList.renderOrders(orders);
 };
 
+
+const handleClearOrders = function () {
+    orders.length = 0;
+
+    orderStorage.saveOrders(orders);
+
+    orderList.renderOrders(orders);
+};
+
+
 const init = function () {
     const loadedOrders = orderStorage.loadOrders();
 
@@ -38,6 +49,10 @@ const init = function () {
 
     if (orderForm) {
         orderForm.addEventListener("submit", handleOrderSubmit);
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", handleClearOrders);
     }
 };
 
