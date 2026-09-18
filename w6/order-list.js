@@ -1,36 +1,18 @@
-const orderTableBody = document.getElementById('order-table-body');
+const tbody = document.getElementById("order-table-body");
 
-const formatDate = function(timestamp) {
-    if (!timestamp) return new Date().toLocaleDateString('en-US');
-    return new Date(timestamp).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
+export function renderOrders(orders) {
+    tbody.innerHTML = "";
+
+    orders.forEach(order => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${order.date}</td>
+            <td>${order.qty}</td>
+            <td>${order.size}</td>
+            <td>${order.totalPrice}</td>
+        `;
+
+        tbody.appendChild(row);
     });
-};
-
-const createOrderRow = function(order) {
-    const tr = document.createElement('tr');
-    
-    if (order.id) tr.dataset.id = order.id;
-
-    tr.innerHTML = `
-        <td>${formatDate(order.date || order.timestamp)}</td>
-        <td>${order.qty}</td>
-        <td>${order.size}</td>
-        <td>$${Number(order.total).toFixed(2)}</td>
-        <td class="action-cell">
-        </td>
-    `;
-    
-    return tr;
-};
-
-export const renderOrders = function(orders) {
-    orderTableBody.innerHTML = '';
-
-    for (const order of orders) {
-        const rowElement = createOrderRow(order);
-        orderTableBody.appendChild(rowElement);
-    }
-};
+}
