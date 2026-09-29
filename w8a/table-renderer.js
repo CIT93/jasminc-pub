@@ -108,7 +108,7 @@ const formatRadioValue = function(value) {
     switch(value) {
     case 'meatHeavy': return 'Meat-heavy ';
      case 'average': return 'Average';
-    case 'vegetarian' return 'Veg.';
+    case 'vegetarian': return 'Veg.';
      case 'vegan': return 'Vegan/Wild';
     case 'prepackaged': return 'Prepkg';
      case 'balanced': return 'Balanced';
