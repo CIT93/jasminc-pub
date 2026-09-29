@@ -13,7 +13,7 @@ const calculateHouseholdPoints = function(householdMembers) {
   if (householdMembers === 3) return 10;
   if (householdMembers === 4) return 8;
   if (householdMembers === 5) return 6; // 6+ people total
-  if (householdMembers > 5) return 4;
+  if (householdMembers < 5) return 4;
   return 0; // Default or invalid input
 };
 
