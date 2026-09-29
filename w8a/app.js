@@ -78,7 +78,7 @@ const handleFormSubmit = function(event) {
      console.log(`key of dietType value of ${formData.dietType}`);
      console.log(`key of foodPackaging value of ${formData.foodPackaging}`);
     // console.log(formData);
-    const calculatedResults = calculator.calculateFootprints(formData);
+    const calculatedResults = calculator.calculateFootprint(formData);
 
     // Combine the input data with the calculated results into a single entry object.
     // Date.now() gives milliseconds since Jan 1, 1970. .toISOString() formats it nicely.
