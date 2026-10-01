@@ -25,8 +25,22 @@ const handleOrderSubmit = function (event) {
 
     orderStorage.saveOrders(orders);
 
-    orderList.renderOrders(orders);
+    orderList.renderOrders(orders, {
+    onDelete: handleDelete,
+    onEdit: handleEdit
+});
 };
+
+// app.js
+
+const handleDelete = function(id) {
+    console.log("App.js: Requesting delete for order", id);
+};
+
+const handleEdit = function(id) {
+    console.log("App.js: Requesting edit for order", id);
+};
+
 
 
 const handleClearOrders = function () {
@@ -45,7 +59,10 @@ const init = function () {
         orders.push(...loadedOrders);
         console.log("Orders loaded");
 
-        orderList.renderOrders(orders);
+        orderList.renderOrders(orders, {
+    onDelete: handleDelete,
+    onEdit: handleEdit
+});
     }
 
     if (orderForm) {
