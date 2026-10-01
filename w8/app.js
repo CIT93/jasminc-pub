@@ -15,6 +15,7 @@ const handleOrderSubmit = function (event) {
     const calculatedPrice = priceCalculator.calculateTotal(orderData);
 
     const newOrder = {
+         id: Date.now().toString(),
         ...orderData,
         ...calculatedPrice,
         timestamp: new Date().toISOString()
