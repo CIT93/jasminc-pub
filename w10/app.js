@@ -11,24 +11,43 @@ const orders = [];
 const handleOrderSubmit = function (event) {
     event.preventDefault();
 
-    const orderData = orderHandler.getOrderInputs();
+     const orderData = orderHandler.getOrderInputs();
     const calculatedPrice = priceCalculator.calculateTotal(orderData);
 
-    const newOrder = {
-         id: Date.now().toString(),
-        ...orderData,
-        ...calculatedPrice,
-        timestamp: new Date().toISOString()
-    };
+    const orderId = document.getElementById('order-id').value;
 
-    orders.push(newOrder);
+    if (orderId) {
+        const index = orders.findIndex(function(order) {
+            return order.id === orderId;
+        });
+
+        if (index !== -1) {
+            orders[index] = {
+                ...orders[index],
+                ...orderData,
+                ...calculatedPrice
+            };
+        }
+    } else {
+        const newOrder = {
+            id: Date.now().toString(),
+            ...orderData,
+            ...calculatedPrice,
+            timestamp: new Date().toISOString()
+        };
+
+        orders.push(newOrder);
+    }
 
     orderStorage.saveOrders(orders);
 
     orderList.renderOrders(orders, {
-    onDelete: handleDelete,
-    onEdit: handleEdit
-});
+        onDelete: handleDelete,
+        onEdit: handleEdit
+    });
+
+    document.getElementById('order-id').value = '';
+    orderForm.reset();
 };
 
 // app.js
