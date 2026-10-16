@@ -53,6 +53,16 @@ const handleDelete = function(id) {
 
 const handleEdit = function(id) {
     console.log("App.js: Requesting edit for order", id);
+     const order = orders.find(function(order) {
+        return order.id === id;
+    });
+
+    if (order) {
+        document.getElementById('qty').value = order.qty;
+        document.querySelector('input[name="size"][value="' + order.size + '"]').checked = true;
+        document.getElementById('gift-wrap').checked = order.giftWrap;
+        document.getElementById('order-id').value = order.id;
+    }
 };
 
 
